@@ -108,11 +108,10 @@ module ApplicationHelper
   # 给提示信息加<p>标签 
   def get_tips_msg(msg)
     unless msg.blank?
-      icon = raw '<i class="fa fa-comments-o"></i> '.html_safe
       if msg.is_a?(Array)
-        msg = msg.map{|m|content_tag(:p, icon + m)}.join
+        msg = msg.map{|m|content_tag(:p, m)}.join
       else
-        msg = content_tag(:p, icon + msg)
+        msg = content_tag(:p, msg)
       end
     end
     return msg
