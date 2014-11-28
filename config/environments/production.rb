@@ -1,4 +1,4 @@
-Evbdup::Application.configure do
+Bskb::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
@@ -20,7 +20,7 @@ Evbdup::Application.configure do
   # config.action_dispatch.rack_cache = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this).
-  config.serve_static_assets = false
+  config.serve_static_assets = true
 
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = :uglifier
@@ -60,6 +60,7 @@ Evbdup::Application.configure do
   # Precompile additional assets.
   # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
   # config.assets.precompile += %w( search.js )
+  config.assets.precompile += %w(ie_9.js ie_9.css ie_10.js form.js kobe.js kobe.css)
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
@@ -77,4 +78,20 @@ Evbdup::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+
+  # 设置 Action Mailer 发邮件
+  config.action_mailer.default :charset => "utf-8", :content_type => "text/html"   #  设置发送邮件的内容的编码类型和发送邮件的默认内容类型
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+  :address => "smtp.163.com",
+  :port => 25,
+  :domain => "163.com",
+  :user_name => "zcladmin@163.com",
+  :password => "zcl100044",
+  #是否允许SMTP客户机使用用户ID AND PASSWORD或其他认证技术向服务器正确标识自己的身份,plain使用文本方式的用户名和认证id和口令 
+  :authentication => :login, 
+  #是否使用ttl/lls加密，当为'true'时，必须使用官网提供的ttl端口号，gmail为587
+  # :enable_starttls_auto => false 
+  }
+  config.action_mailer.raise_delivery_errors = true
 end
