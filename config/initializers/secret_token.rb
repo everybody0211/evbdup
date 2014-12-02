@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Bskb::Application.config.secret_key_base = '6154c7a04ca381cff6a49b0af21a5ba3cb3d707605850234fc092802fd6db58a3c4549041df77fb800082883a3a0a332199de8ebcf06811541e6daed77f9527d'
+Evbdup::Application.config.secret_key_base = '6154c7a04ca381cff6a49b0af21a5ba3cb3d707605850234fc092802fd6db58a3c4549041df77fb800082883a3a0a332199de8ebcf06811541e6daed77f9527d'
