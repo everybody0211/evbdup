@@ -26,20 +26,16 @@ class Kobe::DepartmentsController < KobeController
   def create
     dep = create_and_write_logs(Department, Department.xml)
     if dep
-      tips_get("创建成功。")
       redirect_to kobe_departments_path(id: dep)
     else
-      flash_get(dep.errors.full_messages)
       redirect_to root_path
     end
   end
 
   def update
     if update_and_write_logs(@dep, Department.xml)
-      tips_get("更新单位信息成功。")
       redirect_to kobe_departments_path(id: @dep)
     else
-      flash_get(@dep.errors.full_messages)
       redirect_back_or
     end
   end
@@ -56,6 +52,7 @@ class Kobe::DepartmentsController < KobeController
 
   # 删除单位
   def delete
+    render partial: '/shared/dialog/opt_liyou', locals: { form_id: 'delete_dep_form', action: kobe_department_path(@dep), method: 'delete' }
   end
   
   def destroy
@@ -69,6 +66,7 @@ class Kobe::DepartmentsController < KobeController
 
   # 冻结单位
   def freeze
+    render partial: '/shared/dialog/opt_liyou', locals: { form_id: 'freeze_dep_form', action: update_freeze_kobe_department_path(@dep) }
   end
 
   def update_freeze
@@ -82,6 +80,7 @@ class Kobe::DepartmentsController < KobeController
 
   # 恢复单位
   def recover
+    render partial: '/shared/dialog/opt_liyou', locals: { form_id: 'recover_dep_form', action: update_recover_kobe_department_path(@dep) }
   end
 
   def update_recover

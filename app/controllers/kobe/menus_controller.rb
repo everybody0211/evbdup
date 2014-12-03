@@ -37,20 +37,16 @@ class Kobe::MenusController < KobeController
     # end
 
     if create_and_write_logs(Menu, Menu.xml)
-      tips_get("创建成功。")
       redirect_to kobe_menus_path
     else
-      flash_get(menu.errors.full_messages)
       render 'index'
     end
   end
 
   def update
     if update_and_write_logs(@menu, Menu.xml)
-      tips_get("修改成功。")
       redirect_to kobe_menus_path
     else
-      flash_get(@menu.errors.full_messages)
       render 'index'
     end
   end
