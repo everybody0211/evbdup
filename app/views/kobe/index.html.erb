@@ -1,0 +1,56 @@
+<!-- Links in Alerts -->
+<ol id="alert-3" class="droporder tab-pane fade in active rectangle-list">
+	<li>
+    <div class="alert alert-warning fade in alert-dismissable">
+        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+        <strong>Warning!</strong> Best check yo self, <a href="#" class="alert-link">you're not looking too good.</a>
+    </div>
+  </li>
+  <li>
+    <div class="alert alert-danger fade in">
+        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+        <strong>Oh snap!</strong> Change a few things up and <a href="#" class="alert-link">try submitting again.</a>
+    </div> 
+  </li>
+  <li>               
+    <div class="alert alert-success fade in">
+        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+        <strong>Well done!</strong> <a href="#" class="alert-link">Change a few things up</a> and try submitting again.
+    </div>
+  </li>
+  <li>                  
+    <div class="alert alert-info fade in">
+        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+        <strong>Heads up!</strong> Change a <a href="#" class="alert-link">few things</a> up and try submitting again.
+    </div> 
+  </li>               
+</ol>
+
+<hr/>
+
+<ol class="rounded-list">
+  <li><a href="">List sub item</a></li>
+  <li><a href="">List sub item</a></li>
+  <li><a href="">List sub item</a></li>
+  <li><a href="">List sub item</a></li>
+</ol>
+
+<hr/>
+
+<ol class="rectangle-list">
+  <li><a href="">List sub item</a></li>
+  <li><a href="">List sub item</a></li>
+  <li><a href="">List sub item</a></li>
+  <li><a href="">List sub item</a></li>
+</ol>
+
+<!-- Links in Alerts -->
+
+<script type="text/javascript">
+	$("ol.droporder").dragsort({ dragSelector: "div", dragBetween: true, dragEnd: saveOrder, placeHolderTemplate: "<li class='placeHolder'><div></div></li>" });
+	
+	function saveOrder() {
+		// var data = $("#list1 li").map(function() { return $(this).children().html(); }).get();
+		// $("input[name=list1SortOrder]").val(data.join("|"));
+	};
+</script>

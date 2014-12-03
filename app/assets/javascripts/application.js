@@ -20,6 +20,7 @@
 //= require plugins/fancybox/source/jquery.fancybox.pack
 //= require app
 //= require form
+//= require plugins/jquery.dragsort-0.5.2.min
 
 
 $(function() {

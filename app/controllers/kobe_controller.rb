@@ -4,9 +4,9 @@ class KobeController < ApplicationController
   before_action :init_themes
 
   def index
-    @user = current_user
-    UserMailer.registration_confirmation(@user).deliver
-    render :text => "sdfsdfsdf"
+    # @user = current_user
+    # UserMailer.registration_confirmation(@user).deliver
+    # render :text => "sdfsdfsdf"
   end
 
   def test
