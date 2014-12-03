@@ -59,7 +59,7 @@ class Kobe::DepartmentsController < KobeController
   end
   
   def destroy
-    if @dep.ztree_change_status_and_write_logs("已删除", batch_logs("删除",params[:opt_liyou]))
+    if @dep.change_status_and_write_logs("已删除", stateless_logs("删除",params[:opt_liyou]))
       tips_get("删除单位成功。")
     else
       flash_get(@dep.errors.full_messages)
@@ -72,7 +72,7 @@ class Kobe::DepartmentsController < KobeController
   end
 
   def update_freeze
-    if @dep.ztree_change_status_and_write_logs("冻结", batch_logs("冻结",params[:opt_liyou]))
+    if @dep.change_status_and_write_logs("冻结", stateless_logs("冻结",params[:opt_liyou]))
       tips_get("冻结单位成功。")
     else
       flash_get(@dep.errors.full_messages)
@@ -85,7 +85,7 @@ class Kobe::DepartmentsController < KobeController
   end
 
   def update_recover
-    if @dep.ztree_change_status_and_write_logs("正常", batch_logs("恢复",params[:opt_liyou]))
+    if @dep.change_status_and_write_logs("正常", stateless_logs("恢复",params[:opt_liyou]))
       tips_get("恢复单位成功。")
     else
       flash_get(@dep.errors.full_messages)
