@@ -17,4 +17,14 @@ class CategoriesParam < XmlColumn
 	    </root>
 	  }
 	end
+
+	def default_xml(who='',options={})
+		%Q{
+			<?xml version="1.0" encoding="UTF-8"?>
+			<root>
+			  <node name="品牌" data_type="text" class="text"/>
+			  <node name="型号" data_type="text" class="text"/>
+			</root>
+		}
+	end
 end

@@ -20,7 +20,6 @@ class Kobe::UsersController < KobeController
 
   def update()
     if update_and_write_logs(@user, User.xml)
-      tips_get("更新用户信息成功。")
       redirect_to kobe_departments_path(id: @user.department.id)
     else
       redirect_back_or

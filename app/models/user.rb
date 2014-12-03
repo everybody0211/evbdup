@@ -48,10 +48,8 @@ class User < ActiveRecord::Base
 
   def self.status_array
     [
-      ["资料未填写",0,"light",10], 
-      ["正常",1,"u",100], 
-      ["冻结",2,"yellow",100], 
-      ["等待审核",3,"orange",20],
+      ["正常",0,"u",100], 
+      ["冻结",1,"yellow",100], 
       ["已删除",98,"red",100]
     ]
   end

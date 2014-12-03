@@ -19,8 +19,8 @@ class Category < ActiveRecord::Base
 	# 中文意思 状态值 标签颜色 进度 
 	def self.status_array
 		[
-	    ["冻结",0,"yellow",0],
-	    ["正常",1,"u",100],
+	    ["正常",0,"u",100],
+	    ["冻结",1,"yellow",0],
 	    ["已删除",404,"red",100]
     ]
   end

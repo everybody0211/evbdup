@@ -34,7 +34,6 @@ class Kobe::CategoriesController < KobeController
   def create
     category = create_and_write_logs(Category, Category.xml, { :action => "新增品目" }, { "params" => create_xml(CategoriesParam.xml, CategoriesParam) })
     if category
-      tips_get("新增品目成功。")
       redirect_to kobe_categories_path(id: category)
     else
       redirect_back_or      
@@ -48,8 +47,8 @@ class Kobe::CategoriesController < KobeController
 
   # 删除
   def destroy
-    logs = @category.has_children? ? batch_logs("删除") : prepare_logs_content(@category, "删除")
-    render :text => @category.ztree_change_status_and_write_logs("已删除", logs) ? "删除成功！" : "操作失败！"
+    logs = @category.has_children? ? stateless_logs("删除") : stateless_logs("删除",'',false)
+    render :text => @category.change_status_and_write_logs("已删除", logs) ? "删除成功！" : "操作失败！"
   end
 
   # 删除
@@ -58,7 +57,7 @@ class Kobe::CategoriesController < KobeController
   end
   
   def destroy
-    if @category.ztree_change_status_and_write_logs("已删除", batch_logs("删除",params[:opt_liyou]))
+    if @category.change_status_and_write_logs("已删除", stateless_logs("删除",params[:opt_liyou]))
       tips_get("删除品目成功。")
     else
       flash_get(@category.errors.full_messages)
@@ -72,7 +71,7 @@ class Kobe::CategoriesController < KobeController
   end
 
   def update_freeze
-    if @category.ztree_change_status_and_write_logs("冻结", batch_logs("冻结",params[:opt_liyou]))
+    if @category.change_status_and_write_logs("冻结", stateless_logs("冻结",params[:opt_liyou]))
       tips_get("冻结品目成功。")
     else
       flash_get(@category.errors.full_messages)
@@ -86,7 +85,7 @@ class Kobe::CategoriesController < KobeController
   end
 
   def update_recover
-    if @category.ztree_change_status_and_write_logs("正常", batch_logs("恢复",params[:opt_liyou]))
+    if @category.change_status_and_write_logs("正常", stateless_logs("恢复",params[:opt_liyou]))
       tips_get("恢复品目成功。")
     else
       flash_get(@category.errors.full_messages)

@@ -9,9 +9,7 @@ class Kobe::SuggestionsController < KobeController
   end
 
   def create
-    if create_and_write_logs(Suggestion, Suggestion.xml)
-      tips_get("创建成功。")
-    end
+    create_and_write_logs(Suggestion, Suggestion.xml)
     redirect_back_or
   end
 
@@ -45,13 +43,13 @@ class Kobe::SuggestionsController < KobeController
       case params[:batch_opt]
       when "delete"
         status = Suggestion.get_status_attributes("已删除")[1]
-        logs = batch_logs("删除")
+        logs = stateless_logs("删除")
       when "read"
         status = Suggestion.get_status_attributes("已读")[1]
-        logs = batch_logs("标记为已读")
+        logs = stateless_logs("标记为已读")
       when "unread"
         status = Suggestion.get_status_attributes("未读")[1]
-        logs = batch_logs("标记为未读")
+        logs = stateless_logs("标记为未读")
       when "clean"
         Suggestion.destroy_all(id: params[:check].to_a)
       end
