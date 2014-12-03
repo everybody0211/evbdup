@@ -21,7 +21,6 @@ class Kobe::ProductsController < KobeController
       tips_get("创建产品成功。")
       redirect_to kobe_products_path(id: product)
     else
-      flash_get(product.errors.full_messages)
       redirect_to root_path
     end
   end
@@ -31,7 +30,6 @@ class Kobe::ProductsController < KobeController
       tips_get("更新产品信息成功。")
       redirect_to kobe_products_path(id: @product)
     else
-      flash_get(@product.errors.full_messages)
       redirect_back_or
     end
   end

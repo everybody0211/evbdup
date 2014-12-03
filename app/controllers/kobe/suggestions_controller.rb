@@ -11,8 +11,6 @@ class Kobe::SuggestionsController < KobeController
   def create
     if create_and_write_logs(Suggestion, Suggestion.xml)
       tips_get("创建成功。")
-    else
-      flash_get(suggestion.errors.full_messages)
     end
     redirect_back_or
   end

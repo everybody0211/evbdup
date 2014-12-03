@@ -15,7 +15,7 @@ class Kobe::CategoriesController < KobeController
       obj_contents << show_obj_info(param,CategoriesParam.xml,{title: "参数明细 ##{index+1}"})
     end
     @arr  = []
-    @arr << {title: "参数信息", icon: "fa-info", content: obj_contents}
+    @arr << {title: "参数信息", icon: "fa-info", content: obj_contents} unless @category.has_children?
     @arr << {title: "历史记录", icon: "fa-clock-o", content: show_logs(@category)}
   end
 
@@ -33,10 +33,11 @@ class Kobe::CategoriesController < KobeController
 
   def create
     category = create_and_write_logs(Category, Category.xml, { :action => "新增品目" }, { "params" => create_xml(CategoriesParam.xml, CategoriesParam) })
-    unless category.id
-      redirect_back_or
-    else
+    if category
+      tips_get("新增品目成功。")
       redirect_to kobe_categories_path(id: category)
+    else
+      redirect_back_or      
     end
   end
 
@@ -53,11 +54,12 @@ class Kobe::CategoriesController < KobeController
 
   # 删除
   def delete
+    render partial: '/shared/dialog/opt_liyou', locals: { form_id: 'delete_category_form', action: kobe_category_path(@category), method: 'delete' } 
   end
   
   def destroy
     if @category.ztree_change_status_and_write_logs("已删除", batch_logs("删除",params[:opt_liyou]))
-      tips_get("删除单位成功。")
+      tips_get("删除品目成功。")
     else
       flash_get(@category.errors.full_messages)
     end
@@ -66,11 +68,12 @@ class Kobe::CategoriesController < KobeController
 
   # 冻结
   def freeze
+    render partial: '/shared/dialog/opt_liyou', locals: { form_id: 'freeze_category_form', action: update_freeze_kobe_category_path(@category) }
   end
 
   def update_freeze
     if @category.ztree_change_status_and_write_logs("冻结", batch_logs("冻结",params[:opt_liyou]))
-      tips_get("冻结单位成功。")
+      tips_get("冻结品目成功。")
     else
       flash_get(@category.errors.full_messages)
     end
@@ -79,11 +82,12 @@ class Kobe::CategoriesController < KobeController
 
   # 恢复
   def recover
+    render partial: '/shared/dialog/opt_liyou', locals: { form_id: 'recover_category_form', action: update_recover_kobe_category_path(@category) }
   end
 
   def update_recover
     if @category.ztree_change_status_and_write_logs("正常", batch_logs("恢复",params[:opt_liyou]))
-      tips_get("恢复单位成功。")
+      tips_get("恢复品目成功。")
     else
       flash_get(@category.errors.full_messages)
     end

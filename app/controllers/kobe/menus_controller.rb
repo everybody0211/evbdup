@@ -40,7 +40,6 @@ class Kobe::MenusController < KobeController
       tips_get("创建成功。")
       redirect_to kobe_menus_path
     else
-      flash_get(menu.errors.full_messages)
       render 'index'
     end
   end
@@ -50,7 +49,6 @@ class Kobe::MenusController < KobeController
       tips_get("修改成功。")
       redirect_to kobe_menus_path
     else
-      flash_get(@menu.errors.full_messages)
       render 'index'
     end
   end
