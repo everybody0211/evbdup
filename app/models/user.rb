@@ -60,8 +60,8 @@ class User < ActiveRecord::Base
     %Q{
       <?xml version='1.0' encoding='UTF-8'?>
       <root>
-        <node name='登录名' column='login' class='required rangelength_6_20' display='disabled'/>
-        <node name='电子邮箱' column='email' class='required email' display='disabled'/>
+        <node name='登录名' column='login' class='required rangelength_6_20' display='readonly'/>
+        <node name='电子邮箱' column='email' class='required email' display='readonly'/>
         <node name='姓名' column='name' class='required'/>
         <node name='出生日期' column='birthday' class='date_select required dateISO'/>
         <node name='性别' column='gender' data_type='radio' class='required' data='["男","女"]'/>

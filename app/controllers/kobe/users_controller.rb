@@ -23,7 +23,6 @@ class Kobe::UsersController < KobeController
       tips_get("更新用户信息成功。")
       redirect_to kobe_departments_path(id: @user.department.id)
     else
-      flash_get(@user.errors.full_messages)
       redirect_back_or
     end
   end
