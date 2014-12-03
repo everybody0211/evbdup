@@ -18,7 +18,7 @@ class Kobe::ProductsController < KobeController
   	category = Category.find(params[:id])
     product = create_and_write_logs(Product, category.params, {}, {category_id: category.id})
     if product
-      redirect_to kobe_products_path(id: product)
+      redirect_to kobe_products_path
     else
       redirect_to root_path
     end
@@ -26,7 +26,7 @@ class Kobe::ProductsController < KobeController
 
   def update
     if update_and_write_logs(@product, @product.category.params)
-      redirect_to kobe_products_path(id: @product)
+      redirect_to kobe_products_path
     else
       redirect_back_or
     end
