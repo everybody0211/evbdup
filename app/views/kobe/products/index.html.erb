@@ -5,24 +5,8 @@
     <div class="panel-body">
         <div class="row margin-bottom-10">
             <div class="col-md-8 pull-left">
-            	<%= form_tag(batch_opt_kobe_suggestions_path, method: 'post', id: "list_form") do %>
-                <button class="btn btn-sm btn-danger rounded" value="delete" name="batch_opt">
-                    <i class="fa fa-trash-o"></i>
-                    删除
-                </button>
-                <button class="btn btn-sm btn-info rounded" value="read" name="batch_opt">
-                    <i class="fa fa-check-square-o"></i>
-                    标记为已读
-                </button>
-                <button class="btn btn-sm btn-warning rounded" value="unread" name="batch_opt">
-                    <i class="fa fa-minus-square-o"></i>
-                    标记为未读
-                </button>
-                <button class="btn btn-sm btn-danger rounded" value="clean" name="batch_opt">
-                    <i class="fa fa-trash-o"></i>
-                    彻底删除
-                </button>
-              </form>
+            	<%= more_actions(Product.more_actions_list, 2) %>
+                <%= modal_dialog("more_actions_dialog", render(partial: '/shared/dialog/opt_liyou', locals: { form_id: 'more_actions_form', action: '' })) %>
             </div>
             <div class="col-md-4 pull-right">
                 <div class="input-group">
@@ -34,7 +18,7 @@
                 </div>
             </div>
         </div>
-        <table class="table table-bordered table-hover">
+        <table class="table table-bordered table-hover list_table">
             <thead>
                 <tr>
                     <th class="select_all">
@@ -69,6 +53,5 @@
             </tbody>
         </table>
         <%= paginate @products %> 
-        <% end %>
     </div>                     
 </div>

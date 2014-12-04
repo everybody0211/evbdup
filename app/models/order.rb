@@ -57,35 +57,35 @@ class Order < ActiveRecord::Base
     arr = [] 
     # 查看详细
     if [0,1,2,3,4,404].include?(self.status)
-    	arr << [self.icon_action("详细"), "/kobe/orders/#{self.id}", target: "_blank"]
+    	arr << [self.class.icon_action("详细"), "/kobe/orders/#{self.id}", target: "_blank"]
    	end
     # 修改
     if [0,4,404].include?(self.status)
-    	arr << [self.icon_action("修改"), "/kobe/orders/#{self.id}/edit"]
+    	arr << [self.class.icon_action("修改"), "/kobe/orders/#{self.id}/edit"]
     end
     # 修改
     if [0,4,404].include?(self.status)
-    	arr << [self.icon_action("提交"), "/kobe/orders/#{self.id}/submit"]
+    	arr << [self.class.icon_action("提交"), "/kobe/orders/#{self.id}/submit"]
     end
     # 确认
     if [0,1,404].include?(self.status)
-    	arr << [self.icon_action("确认订单"), "/kobe/orders/#{self.id}/confirm"]
+    	arr << [self.class.icon_action("确认订单"), "/kobe/orders/#{self.id}/confirm"]
     end
     # 审核
     if [0,1,404].include?(self.status)
-    	arr << [self.icon_action("审核"), "/kobe/orders/#{self.id}/audit"]
+    	arr << [self.class.icon_action("审核"), "/kobe/orders/#{self.id}/audit"]
     end
     # 打印
     if [0,1,404].include?(self.status)
-    	arr << [self.icon_action("打印"), "/kobe/orders/#{self.id}/print", target: "_blank"]
+    	arr << [self.class.icon_action("打印"), "/kobe/orders/#{self.id}/print", target: "_blank"]
     end
     # 删除
     if [0,1,3,4].include?(self.status)
-	    arr << [self.icon_action("删除"), "/kobe/orders/#{self.id}", method: :delete, data: {confirm: "确定要删除吗?"}]
+	    arr << [self.class.icon_action("删除"), "/kobe/orders/#{self.id}", method: :delete, data: {confirm: "确定要删除吗?"}]
 	  end
     # 彻底删除
     if self.status == 404
-	    arr << [self.icon_action("彻底删除"), "/kobe/orders/#{self.id}", method: :delete, data: {confirm: "删除后不可恢复，确定要删除吗?"}]
+	    arr << [self.class.icon_action("彻底删除"), "/kobe/orders/#{self.id}", method: :delete, data: {confirm: "删除后不可恢复，确定要删除吗?"}]
 	  end
 	  return arr
   end

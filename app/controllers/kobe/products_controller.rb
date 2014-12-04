@@ -33,7 +33,7 @@ class Kobe::ProductsController < KobeController
   end
 
   def edit
-    @myform = SingleForm.new(@product.category.params, @product, { form_id: "product_form", upload_files: true, action: kobe_product_path(@product), method: "patch" })
+    @myform = SingleForm.new(@product.category.params, @product, { form_id: "product_form", upload_files: true, action: kobe_product_path(@product), method: "patch", title: '<i class="fa fa-pencil-square-o"></i> 修改产品', grid: 4 })
   end
 
   def show
@@ -43,6 +43,23 @@ class Kobe::ProductsController < KobeController
     @arr << { title: "历史记录", icon: "fa-clock-o", content: show_logs(@product) }
   end
 
+  # 冻结
+  def freeze
+    Product.batch_change_status_and_write_logs(params[:id_array].split(","), "冻结", stateless_logs("冻结",params[:opt_liyou]))
+    redirect_to kobe_products_path
+  end
+
+  # 删除
+  def delete
+    Product.batch_change_status_and_write_logs(params[:id_array].split(","), "已删除", stateless_logs("删除",params[:opt_liyou]))
+    redirect_to kobe_products_path
+  end
+
+  # 恢复
+  def recover
+    Product.batch_change_status_and_write_logs(params[:id_array].split(","), "正常", stateless_logs("恢复",params[:opt_liyou]))
+    redirect_to kobe_products_path
+  end
 
   private
 

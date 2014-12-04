@@ -80,21 +80,21 @@ class User < ActiveRecord::Base
     arr = [] 
     dialog = "#opt_dialog"
     # 详细
-    title = self.icon_action("详细")
+    title = self.class.icon_action("详细")
     arr << [title, dialog, "data-toggle" => "modal", onClick: %Q{ modal_dialog_show("#{title}", '/kobe/users/#{self.id}', '#{dialog}') }]
     # 修改
     if [0,404].include?(self.status)
-      title = self.icon_action("修改")
+      title = self.class.icon_action("修改")
       arr << [title, dialog, "data-toggle" => "modal", onClick: %Q{ modal_dialog_show("#{title}", '/kobe/users/#{self.id}/edit', '#{dialog}') }]
     end
     # 重置密码
     if [0,404].include?(self.status)
-      title = self.icon_action("重置密码")
+      title = self.class.icon_action("重置密码")
       arr << [title, dialog, "data-toggle" => "modal", onClick: %Q{ modal_dialog_show("#{title}", '/kobe/users/#{self.id}/reset_password', '#{dialog}') }]
     end
     # 冻结
     if [0,404].include?(self.status)
-      title = self.icon_action("冻结")
+      title = self.class.icon_action("冻结")
       arr << [title, dialog, "data-toggle" => "modal", onClick: %Q{ modal_dialog_show("#{title}", '/kobe/users/#{self.id}/freeze', '#{dialog}') }]
     end
     return arr

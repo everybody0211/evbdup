@@ -26,7 +26,13 @@ module ApplicationHelper
         opts = btn ? {class: "btn btn-sm btn-default"} : {}
       else
         opts = arr[2]
-        opts[:class] = "btn btn-sm btn-default" if btn
+        if btn
+          cls_name = "btn btn-sm btn-default" 
+          if opts.has_key?(:class) || opts.has_key?("class")
+            cls_name << " #{opts[:class] || opts["class"]}"
+          end
+          opts[:class] = cls_name
+        end
       end
       return link_to(arr[0].html_safe,arr[1],opts)
     end

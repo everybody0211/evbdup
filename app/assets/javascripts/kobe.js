@@ -15,8 +15,8 @@ function setSelectAll(){
     if (!$(this).checked) {  
         $("#check_all").attr("checked", false);  
     }  
-    var chsub = $(".list_table tbody input[type='checkbox']").length; //获取subcheck的个数  
-    var checkedsub = $(".list_table tbody input[type='checkbox']:checked").length; //获取选中的subcheck的个数  
+    var chsub = $(".list_table tbody input[type='checkbox']").length; //获取checkbox的个数  
+    var checkedsub = $(".list_table tbody input[type='checkbox']:checked").length; //获取选中的checkbox的个数  
     if (checkedsub == chsub) {  
         $("#check_all").attr("checked", true);  
     }else {
@@ -55,3 +55,19 @@ function modal_dialog_show(title,ajax_url,modal_dialog_div,upload_form_id) {
     $(modal_dialog_div + " .modal-header .modal-title").html(title);
     show_content(ajax_url, modal_dialog_div + " .modal-body", upload_form_id);
 }
+
+// 更多操作,用于list列表页面,主要用于批量操作
+$(".more_actions").on('click',function(){
+    //获取选中的checkbox的个数
+    var checked = $(".list_table tbody input[type='checkbox']:checked"); 
+    if (checked.length == 0) {
+        flash_dialog("请选择至少一项再进行操作！");
+        return false;
+    }else {
+        $('#more_actions_form').attr("action", this.attributes["value"].value);
+        $("#more_actions_dialog .modal-header .modal-title").html(this.innerHTML);
+        var id_array = checked.map(function(){ return $(this).val(); }).get().join(',');
+        $('#more_actions_form').append("<input type='hidden' name='id_array' value='"+ id_array +"'/>")
+        $('#more_actions_dialog').modal();
+    }
+});

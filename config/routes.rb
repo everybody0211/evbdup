@@ -80,7 +80,11 @@ Evbdup::Application.routes.draw do
         post :update_freeze, :update_recover
       end
     end
-    resources :products
+    resources :products do
+      collection do
+        post :delete, :freeze, :recover
+      end
+    end
     # 意见反馈
     resources :suggestions do
       post :mark_as_read, :mark_as_unread, on: :member

@@ -67,26 +67,26 @@ class Department < ActiveRecord::Base
     dialog = "#opt_dialog"
     arr = [] 
     # 查看单位信息
-    arr << [self.icon_action("详细"), "javascript:void(0)", onClick: "show_content('/kobe/departments/#{self.id}', '#{show_div}')"]
+    arr << [self.class.icon_action("详细"), "javascript:void(0)", onClick: "show_content('/kobe/departments/#{self.id}', '#{show_div}')"]
     # 提交
     if [0].include?(self.status) && self.get_tips.blank?
-      arr << [self.icon_action("提交"), "/kobe/departments/#{self.id}/commit", method: "post", data: { confirm: "提交后不允许再修改，确定提交吗?" }]
+      arr << [self.class.icon_action("提交"), "/kobe/departments/#{self.id}/commit", method: "post", data: { confirm: "提交后不允许再修改，确定提交吗?" }]
     end
     # 修改单位信息
     if [0,1,404].include?(self.status)
-      arr << [self.icon_action("修改"), "javascript:void(0)", onClick: "show_content('/kobe/departments/#{self.id}/edit','#{show_div}')"]
+      arr << [self.class.icon_action("修改"), "javascript:void(0)", onClick: "show_content('/kobe/departments/#{self.id}/edit','#{show_div}')"]
     end
     # 修改资质证书
     if [0,1,404].include?(self.status)
-      arr << [self.icon_action("上传资质"), "javascript:void(0)", onClick: "show_content('/kobe/departments/#{self.id}/upload','#{show_div}','edit_upload_fileupload')"]
+      arr << [self.class.icon_action("上传资质"), "javascript:void(0)", onClick: "show_content('/kobe/departments/#{self.id}/upload','#{show_div}','edit_upload_fileupload')"]
     end
     # 增加下属单位
     if [0,1,404].include?(self.status)
-      arr << [self.icon_action("增加下属单位"), "javascript:void(0)", onClick: "show_content('/kobe/departments/new?pid=#{self.id}','#{show_div}')"]
+      arr << [self.class.icon_action("增加下属单位"), "javascript:void(0)", onClick: "show_content('/kobe/departments/new?pid=#{self.id}','#{show_div}')"]
     end
     # 分配人员账号
     if [0,1,404].include?(self.status)
-      title = self.icon_action("增加人员")
+      title = self.class.icon_action("增加人员")
       arr << [title, dialog, "data-toggle" => "modal", onClick: %Q{ modal_dialog_show("#{title}", '/kobe/departments/#{self.id}/add_user', '#{dialog}') }]
     end
     return arr

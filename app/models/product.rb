@@ -17,11 +17,11 @@ class Product < ActiveRecord::Base
   # 中文意思 状态值 标签颜色 进度 
 	def self.status_array
 		[
-	    ["未提交",0,"orange",10,[1,4,101],[1,0]],
-	    ["等待审核",1,"blue",50,[0,4],[3,4]],
-	    ["已完成",3,"u",100,[1,4],[3,4]],
-	    ["未评价",4,"purple",100,[0,1,101],[3,4]],
-	    ["已删除",404,"red",100,[0,1,3,4],nil]
+	    ["未提交",0,"orange",10],
+	    ["等待审核",1,"blue",50],
+	    ["正常",2,"u",100],
+      ["冻结",3,"yellow",0],
+	    ["已删除",404,"red",0]
     ]
   end
 
@@ -35,14 +35,23 @@ class Product < ActiveRecord::Base
   def cando_list(action='')
     arr = [] 
     # 查看详细
-    if [0,1,2,3,4,404].include?(self.status)
-    	arr << [self.icon_action("详细"), "/kobe/products/#{self.id}", target: "_blank"]
+    if [0,1,2,3,404].include?(self.status)
+    	arr << [self.class.icon_action("详细"), "/kobe/products/#{self.id}", target: "_blank"]
    	end
     # 修改
-    if [0,4,404].include?(self.status)
-    	arr << [self.icon_action("修改"), "/kobe/products/#{self.id}/edit"]
+    if [0,3,404].include?(self.status)
+    	arr << [self.class.icon_action("修改"), "/kobe/products/#{self.id}/edit"]
     end
 	  return arr
+  end
+
+  def self.more_actions_list(action='')
+    arr = []
+    arr << [self.icon_action("增加"), "javascript:void(0)", json_url: "/json/categories", class: 'tree_checkbox']
+    arr << [self.icon_action("冻结"), "/kobe/products/freeze"]
+    arr << [self.icon_action("恢复"), "/kobe/products/recover"]
+    arr << [self.icon_action("删除"), "/kobe/products/delete"]
+    arr << [self.icon_action("彻底删除"), "/kobe/products/clean"]
   end
 
 end

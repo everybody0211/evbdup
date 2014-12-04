@@ -10,12 +10,14 @@ class Kobe::CategoriesController < KobeController
 	end
 
   def show
-    obj_contents = ""
-    create_objs_from_xml_model(@category.params, CategoriesParam).each_with_index do |param,index|
-      obj_contents << show_obj_info(param,CategoriesParam.xml,{title: "参数明细 ##{index+1}"})
-    end
     @arr  = []
-    @arr << {title: "参数信息", icon: "fa-info", content: obj_contents} unless @category.has_children?
+    unless @category.has_children?
+      obj_contents = ""
+      create_objs_from_xml_model(@category.params, CategoriesParam).each_with_index do |param,index|
+        obj_contents << show_obj_info(param,CategoriesParam.xml,{title: "参数明细 ##{index+1}"})
+      end
+      @arr << {title: "参数信息", icon: "fa-info", content: obj_contents} 
+    end
     @arr << {title: "历史记录", icon: "fa-clock-o", content: show_logs(@category)}
   end
 
@@ -43,12 +45,6 @@ class Kobe::CategoriesController < KobeController
   def update
     update_and_write_logs(@category, Category.xml, { :action => "修改品目" }, { "params" => create_xml(CategoriesParam.xml, CategoriesParam) })
     redirect_to kobe_categories_path(id: @category)
-  end
-
-  # 删除
-  def destroy
-    logs = @category.has_children? ? stateless_logs("删除") : stateless_logs("删除",'',false)
-    render :text => @category.change_status_and_write_logs("已删除", logs) ? "删除成功！" : "操作失败！"
   end
 
   # 删除
