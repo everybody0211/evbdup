@@ -106,4 +106,5 @@ group :development, :test do
   gem "binding_of_caller", "~> 0.7.2"
   # 开发模式加速
   gem 'rails-dev-tweaks', '~> 1.2.0'
+  gem 'rake', '~> 10.4.2'
 end

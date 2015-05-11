@@ -1,5 +1,7 @@
 /*Import Ladda Button Plugin*/
-@import url(ladda.min.css);
+/*
+ *= require plugins/ladda-buttons/css/ladda.min
+*/
 
 .ladda-btn .btn-u {
 	font-weight: 600;

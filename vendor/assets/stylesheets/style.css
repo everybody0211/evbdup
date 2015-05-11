@@ -7,13 +7,19 @@
 */
 
 /*Import Global Compulsory CSS Files*/
-@import url(app.css);
-@import url(plugins.css);
-@import url(ie8.css);
+
+/*
+ *= require app
+ *= require plugins
+ *= require ie8
+*/
 
 /*Import CSS Plugins*/
-@import url(plugins/animate.css);
-@import url(plugins/box-shadows.css);
+
+/*
+ *= require plugins/animate
+ *= require plugins/box-shadows
+*/
 
 /*Boxed Layout
 ------------------------------------*/

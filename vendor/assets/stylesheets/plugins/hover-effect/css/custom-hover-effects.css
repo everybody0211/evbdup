@@ -1,5 +1,7 @@
 /*Import custom_hover_effect.css*/
-@import url(hover.css);
+/*
+ *= require plugins/hover-effect/css/hover
+*/
 
 .link-effects .tag-box a {
   margin: 0 10px 10px 0;
